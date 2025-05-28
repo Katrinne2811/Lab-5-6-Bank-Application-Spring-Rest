@@ -27,9 +27,9 @@ public class BankAccountService {
 
     //Поле - репозиторій з даними про банк. рахунки, що забезпечує зв'язок з БД та виконання CRUD-операції
     private final BankAccountRepository bankAccountRepository;
-    private final TransactionRepository transactionRepository;
+   
 
-    //Поле для
+    //Поле для мапінгу Java-класів сутностей з DTO об'єктами 
     private final ModelMapper modelMapper;
 
     //Конструктор об'єкта сервісу банку
@@ -123,9 +123,6 @@ public class BankAccountService {
         List<Transaction> allTransactions = new ArrayList<>();
         allTransactions.addAll(bankAccount.getOutgoingTransactions());
         allTransactions.addAll(bankAccount.getIncomingTransactions());
-        //for (Transaction transaction : allTransactions) {
-            //transactionRepository.save(transaction);
-        //}
         //Перетворення списку транзакцій на список об'єктів типу DTO для передачі даних про транзакції
         return allTransactions.stream()
         .map(transaction -> modelMapper.map(transaction, TransactionDto.class))
